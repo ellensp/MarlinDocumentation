@@ -62,7 +62,8 @@ If you're developing a custom board, try to use common pinouts as much as possib
 <table class="table table-condensed table-striped">
 <tr><th>Name</th><th>Description</th><th>Since</th></tr>
 {% for board in item.boards %}
-<tr{% if board.class %} class="{{ board.class }}"{% endif %}><td><code>BOARD_{{ board.name }}{% if board.old[0].name %}</code><br><em>(<code>BOARD_{{ board.old[0].name }}</code>)</em>{% endif %}</td><td>{{ board.brief }}</td><td>{% if board.since %}{{ board.since }}{% endif %}{% if board.old[0].since %}<br><em>({{ board.old[0].since }})</em>{% endif %}</td></tr>
+{% assign old_board = board.old | first %}
+<tr{% if board.class %} class="{{ board.class }}"{% endif %}><td><code>BOARD_{{ board.name }}</code>{% if old_board and old_board.name %}<br><em>(<code>BOARD_{{ old_board.name }}</code>)</em>{% endif %}</td><td>{{ board.brief }}</td><td>{% if board.since %}{{ board.since }}{% endif %}{% if old_board and old_board.since %}<br><em>({{ old_board.since }})</em>{% endif %}</td></tr>
 {% endfor %}
 </table>
 {% endfor %}
